@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(dpdk_ring_study)
 
 # 设置C++标准
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 选项：启用ASAN
@@ -31,8 +31,10 @@ set(COMMON_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-but-set-variab
 
 # 如果启用ASAN，添加ASAN标志
 if(ENABLE_ASAN)
+    MESSAGE(STATUS "AddressSanitizer enabled")
     set(COMMON_FLAGS "${COMMON_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
-    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -fsanitize=address")
+    add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address)
 endif()
 
 # 如果使用DPDK，需要设置特定的编译和链接选项

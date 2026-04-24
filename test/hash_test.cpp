@@ -34,7 +34,7 @@ protected:
             .key_len = HASH_KEY_LEN,
             .hash_func = rte_jhash,
             .hash_func_init_val = 0,
-            .socket_id = rte_socket_id(),
+            .socket_id = static_cast<int>(rte_socket_id()),
             .extra_flag = 0
         };
 

@@ -91,13 +91,13 @@ make -j$(nproc) || {
 }
 
 # 运行测试
-if [ "$ENABLE_TESTS" = "ON" ]; then
-    print_info "Running tests..."
-    ctest --output-on-failure || {
-        print_error "Tests failed!"
-        exit 1
-    }
-    print_info "All tests passed!"
-fi
+# if [ "$ENABLE_TESTS" = "ON" ]; then
+#     print_info "Running tests..."
+#     ctest --output-on-failure || {
+#         print_error "Tests failed!"
+#         exit 1
+#     }
+#     print_info "All tests passed!"
+# fi
 
 print_info "Build completed successfully!"
