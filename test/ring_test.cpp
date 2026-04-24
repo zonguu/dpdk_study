@@ -204,4 +204,6 @@ TEST_F(DpdkRingTest, BoundaryConditions) {
 
     // 清理环形队列
     rte_ring_free(test_ring);
+    test_ring = nullptr;
+    auto p = malloc(1024);
 }

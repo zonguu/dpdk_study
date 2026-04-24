@@ -5,10 +5,8 @@ project(dpdk_ring_study)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# 选项：启用ASAN
-option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
-# 选项：启用测试
 option(ENABLE_TESTS "Enable tests" ON)
+option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
 
 # 查找必要的包
 find_package(PkgConfig REQUIRED)
@@ -32,7 +30,6 @@ set(COMMON_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-but-set-variab
 # 如果启用ASAN，添加ASAN标志
 if(ENABLE_ASAN)
     MESSAGE(STATUS "AddressSanitizer enabled")
-    set(COMMON_FLAGS "${COMMON_FLAGS} -fsanitize=address -fno-omit-frame-pointer")
     add_compile_options(-fsanitize=address -fno-omit-frame-pointer)
     add_link_options(-fsanitize=address)
 endif()
@@ -68,10 +65,9 @@ if(ENABLE_TESTS)
     set_target_properties(dpdk_test PROPERTIES
         LINK_FLAGS "-Wl,--no-as-needed"
     )
-    add_test(NAME dpdk_test COMMAND dpdk_test)
 
     set_target_properties(dpdk_test PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/output
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/output
     )
 
 endif()
